@@ -21,8 +21,9 @@ public class TC03 extends BaseDriver {
         androidDriver.findElement(By.id("com.hmh.api:id/select_button")).click();
 
         // In the opened activity, any element is selected in the list dialog,
-        List<MobileElement> elementsOne = (List<MobileElement>) androidDriver.findElementByClassName("android.widget.TextView");
-        System.out.println(elementsOne);
+
+        // List<MobileElement> elementsOne = (List<MobileElement>) androidDriver.findElementByClassName("android.widget.TextView");
+        // System.out.println(elementsOne);
 
         //A fter the selection is made, the order of the selected element and the name of the element is checked in the alert message.
         Assert.assertEquals(androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[2]")).getText(),"Command two");
