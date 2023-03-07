@@ -1,10 +1,8 @@
 package tests;
 
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import utilities.BaseDriver;
 
@@ -19,25 +17,22 @@ public class TC01 extends BaseDriver {
         Assert.assertEquals(androidDriver.findElement(By.xpath("//*[@text='API Demos']")).getText(),"API Demos");
 
         //'Go to App
-        WebElement appButton =androidDriver.findElement(By.xpath("//android.widget.TextView[@text='App']"));
-        appButton.click();
+        androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[3]")).click();
 
         //> ActionBar
-        WebElement actionBar =androidDriver.findElement(By.xpath("//android.widget.TextView[@text='Action Bar']"));
-        actionBar.click();
+        androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[1]")).click();
 
         //> Action Bar Tabs' menu.
-        WebElement actionBarTabs =androidDriver.findElement(By.xpath("(//android.widget.TextView[@text='Action Bar Tabs'])[1]"));
-        actionBarTabs.click();
+        androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[2]")).click();
 
         // !!!!??Make sure that the 'Toggle tab mode' is passive.
-        WebElement toggleTab=androidDriver.findElementById("com.hmh.api:id/btn_toggle_tabs");
-        toggleTab.click();
-        Thread.sleep(5000);
-        WebElement addNewTab =androidDriver.findElement(By.id("com.hmh.api:id/btn_add_tab"));
+
+        Thread.sleep(1000);
         // Add 3 new tabs,
         for (int i = 0; i < 3; i++) {
-            addNewTab.click();
+
+            androidDriver.findElement(By.id("com.hmh.api:id/btn_add_tab")).click();
+
         }
         // check that 3 tabs have been added
         androidDriver.findElement(By.id("com.hmh.api:id/btn_toggle_tabs")).click();
@@ -50,7 +45,7 @@ public class TC01 extends BaseDriver {
 
 
         // and it is checked that the correct tab has been deleted.
-       Assert.assertEquals(androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.HorizontalScrollView/android.widget.LinearLayout/android.app.ActionBar.Tab[2]/android.widget.TextView")).getText(),"TAB 1");
+        Assert.assertEquals(androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.HorizontalScrollView/android.widget.LinearLayout/android.app.ActionBar.Tab[2]/android.widget.TextView")).getText(),"TAB 1");
 
 
         // With 'Remove all tabs',
@@ -58,9 +53,6 @@ public class TC01 extends BaseDriver {
 
         // all tabs are deleted and it is checked that there are no active tabs in the activity
         Assert.assertTrue(androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.HorizontalScrollView/android.widget.LinearLayout")).isDisplayed());
-
-
     }
 
 }
-
