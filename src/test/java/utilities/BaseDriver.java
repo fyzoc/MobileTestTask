@@ -16,7 +16,7 @@ public class BaseDriver {
 
 
                 DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-                desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9.0");
+                desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
                 desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
                 desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Emulator");
                 desiredCapabilities.setCapability(MobileCapabilityType.APP, "C:/Users/HP/IdeaProjects/MobileTestTask/src/App/API_Demos.apk");
