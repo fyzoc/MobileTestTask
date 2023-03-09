@@ -5,6 +5,7 @@ import io.appium.java_client.android.AndroidDriver;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utilities.BaseDriver;
 
 import java.net.MalformedURLException;
@@ -25,12 +26,12 @@ public class TC03 extends BaseDriver {
         // List<MobileElement> elementsOne = (List<MobileElement>) androidDriver.findElementByClassName("android.widget.TextView");
         // System.out.println(elementsOne);
 
-        //A fter the selection is made, the order of the selected element and the name of the element is checked in the alert message.
-        Assert.assertEquals(androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[2]")).getText(),"Command two");
-        androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[2]")).click();
-        Assert.assertEquals(androidDriver.findElement(By.id("android:id/message")).getText(),"You selected: 1 , Command two");
-
-
+        //After the selection is made, the order of the selected element and the name of the element is checked in the alert message.
+        WebElement header=androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView[2]"));
+        Assert.assertEquals(header.getText(),"Command two");
+        header.click();
+        WebElement message = androidDriver.findElement(By.id("android:id/message"));
+        Assert.assertEquals((message).getText(),"You selected: 1 , Command two");
     }
 
 }

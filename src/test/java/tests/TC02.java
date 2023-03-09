@@ -12,33 +12,49 @@ import java.net.MalformedURLException;
 
 public class TC02 extends BaseDriver {
     @Test
-    public void tc02() throws MalformedURLException {
+    public void tc02() throws MalformedURLException, InterruptedException {
         AndroidDriver androidDriver = getAppiumDriver();
 
         //'App > Activity > Custom Title' menu. In the activity that opens
-        WebElement appButton =  androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[3]"));
+        WebElement appButton=androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[3]"));
+        Thread.sleep(4000);
         appButton.click();
-        androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[2]")).click();
-        androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[3]")).click();
+
+        WebElement activity=androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[2]"));
+        Thread.sleep(4000);
+        activity.click();
+        WebElement customTitle= androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.ListView/android.widget.TextView[3]"));
+        customTitle.click();
+        Thread.sleep(5000);
 
         //the default textBox and navigationBar texts are checked
-        Assert.assertTrue(androidDriver.findElement(By.id("com.hmh.api:id/left_text_edit")).getText().contains("Left is best"));
-        Assert.assertEquals(androidDriver.findElement(By.id("com.hmh.api:id/right_text_edit")).getText(),"Right is always right");
-        Assert.assertTrue(androidDriver.findElement(By.id("com.hmh.api:id/right_text_button")).isDisplayed());
-        Assert.assertTrue( androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.RelativeLayout")).isDisplayed());
+        WebElement leftBox=androidDriver.findElement(By.id("com.hmh.api:id/left_text_edit"));
+        Assert.assertTrue(leftBox.getText().contains("Left is best"));
+        WebElement rightBox= androidDriver.findElement(By.id("com.hmh.api:id/right_text_edit"));
+        Assert.assertEquals(rightBox.getText(),"Right is always right");
+        WebElement rightButon= androidDriver.findElement(By.id("com.hmh.api:id/right_text_button"));
+        Assert.assertTrue(rightButon.isDisplayed());
+        WebElement header=androidDriver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.RelativeLayout"));
+        Assert.assertTrue(header.isDisplayed());
 
         //By changing the left and right textBox fields, it is checked that the relevant textBox and navigationBar texts have changed.
-        androidDriver.findElement(By.id("com.hmh.api:id/left_text_edit")).click();
-        androidDriver.findElement(By.id("com.hmh.api:id/left_text_edit")).clear();
-        androidDriver.findElement(By.id("com.hmh.api:id/left_text_edit")).sendKeys("feyza");
-        androidDriver.findElement(By.id("com.hmh.api:id/left_text_button")).click();
-        Assert.assertTrue(androidDriver.findElement(By.id("com.hmh.api:id/left_text_edit")).getText().contains("feyza"));
+        leftBox.click();
+        leftBox.clear();
+        Thread.sleep(5000);
+        leftBox.findElement(By.id("com.hmh.api:id/left_text_edit")).sendKeys("feyza");
 
-        androidDriver.findElement(By.id("com.hmh.api:id/right_text_edit")).click();
-        androidDriver.findElement(By.id("com.hmh.api:id/right_text_edit")).clear();
-        androidDriver.findElement(By.id("com.hmh.api:id/right_text_edit")).sendKeys("ocakdan");
-        androidDriver.findElement(By.id("com.hmh.api:id/right_text_button")).click();
-        Assert.assertEquals(androidDriver.findElement(By.id("com.hmh.api:id/right_text_edit")).getText(),"ocakdan");
+        WebElement leftButon= androidDriver.findElement(By.id("com.hmh.api:id/left_text_button"));
+        leftButon.click();
+       // Assert.assertTrue(header.getText().contains("feyza"));
+
+
+        rightBox.click();
+        rightBox.clear();
+        rightBox.sendKeys("ocakdan");
+
+
+        rightButon.click();
+        Assert.assertEquals(rightBox.getText(),"ocakdan");
 
 
     }

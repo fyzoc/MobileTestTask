@@ -68,8 +68,8 @@ public class TC04 extends BaseDriver {
             touchAction.press(PointOption.point(start_x,start_y)).
                     waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(end_x,end_y)).
                     release().perform();
-
-        }while(mobileList.size()==0);
+        }
+        while(mobileList.size()==0);
         Thread.sleep(2000);
         WebElement activateDeviceAdmin=androidDriver.findElementById("com.android.settings:id/action_button");
         activateDeviceAdmin.click();
